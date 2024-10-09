@@ -54,6 +54,12 @@
     document.getElementById("text").innerHTML=expression;
 
   }
+  //  清除键
+  function allClear()
+  {
+    expression='';
+    document.getElementById("text").innerHTML=expression;
+  }
 </script>
 <body style="background: #95adba;">
   <!--计算器主体-->
@@ -148,6 +154,9 @@
         </div>
         <div class="button-div2" id="buttonBack">
           <button class="button" id="bb" onclick="Delete()">←</button>
+        </div>
+        <div class="button-div2" id="buttonAC">
+          <button class="button" id="bAC" onclick="allClear()">AC</button>
         </div>
       </div>
     </div>
