@@ -55,23 +55,12 @@ function calculate(expression) {
 
   // 使用正则表达式将输入的表达式分割成操作数和操作符
   const tokens = expression.match(/(\d+(\.\d+)?|[\+\-\*\/\^])/g);
-  // 定义用来记录循环次数的变量
-  var i=0;
-  // 定义用来辨别正负的变量
-  var a=0;
   // 遍历分割后的每个 token
   for (const token of tokens) {
     // 如果 token 是数字（包括小数），则将其转换为浮点数并压入数栈
-    if (!isNaN(token)&&a===0) {
+    if (!isNaN(token)) {
       numberStack.push(parseFloat(token));
-    }else if(!isNAN(token)&&a===1){
-      numberStack.push(-(parseFloat(token)));
-    }else if (["+"].includes(token) && i===0){
-      continue;
-    }else if(["-"].includes(token) && i===0){
-      //如果是第一个字符是负数，记录变量
-      a=1;
-    }else if (["+", "-", "*", "/","^"].includes(token)&&i!==0) {
+    }else if (["+", "-", "*", "/","^"].includes(token)) {
       // 如果 token 是操作符，则处理符号栈中的操作符
       while (
         operatorStack.length > 0 &&
