@@ -90,7 +90,6 @@ function calculate(expression) {
       // 将当前操作符压入符号栈
       operatorStack.push(token);
     }
-    i=0;
   }
   
   // 调用 evaluate 函数计算最终结果并返回
