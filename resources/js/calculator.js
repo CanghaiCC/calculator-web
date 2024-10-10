@@ -19,7 +19,7 @@ function calculate(expression) {
     "-": 1,
     "*": 2, // 乘法和除法的优先级为2
     "/": 2,
-    "^": 3,
+    "^": 3,//  幂运算的优先级为3
   };
 
   // applyOperator 函数用于执行具体的运算操作
@@ -55,13 +55,23 @@ function calculate(expression) {
 
   // 使用正则表达式将输入的表达式分割成操作数和操作符
   const tokens = expression.match(/(\d+(\.\d+)?|[\+\-\*\/\^])/g);
-
+  // 定义用来记录循环次数的变量
+  var i=0;
+  // 定义用来辨别正负的变量
+  var a=0;
   // 遍历分割后的每个 token
   for (const token of tokens) {
     // 如果 token 是数字（包括小数），则将其转换为浮点数并压入数栈
-    if (!isNaN(token)) {
+    if (!isNaN(token)&&a==0) {
       numberStack.push(parseFloat(token));
-    } else if (["+", "-", "*", "/","^"].includes(token)) {
+    }else if(!isNAN(token)&&a==1){
+      numberStack.push(-parseFloat(token));
+    }else if (["+"].include(token) && i===0){
+      continue;
+    }else if(["-"].include(token) && i===0){
+      //如果是第一个字符是负数，记录变量
+      a=1;
+    }else if (["+", "-", "*", "/","^"].includes(token)&&i!=0) {
       // 如果 token 是操作符，则处理符号栈中的操作符
       while (
         operatorStack.length > 0 &&
@@ -80,6 +90,7 @@ function calculate(expression) {
       // 将当前操作符压入符号栈
       operatorStack.push(token);
     }
+    i=0;
   }
   
   // 调用 evaluate 函数计算最终结果并返回
