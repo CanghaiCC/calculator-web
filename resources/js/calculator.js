@@ -62,16 +62,16 @@ function calculate(expression) {
   // 遍历分割后的每个 token
   for (const token of tokens) {
     // 如果 token 是数字（包括小数），则将其转换为浮点数并压入数栈
-    if (!isNaN(token)&&a==0) {
+    if (!isNaN(token)&&a===0) {
       numberStack.push(parseFloat(token));
-    }else if(!isNAN(token)&&a==1){
-      numberStack.push(-parseFloat(token));
-    }else if (["+"].include(token) && i===0){
+    }else if(!isNAN(token)&&a===1){
+      numberStack.push(-(parseFloat(token)));
+    }else if (["+"].includes(token) && i===0){
       continue;
-    }else if(["-"].include(token) && i===0){
+    }else if(["-"].includes(token) && i===0){
       //如果是第一个字符是负数，记录变量
       a=1;
-    }else if (["+", "-", "*", "/","^"].includes(token)&&i!=0) {
+    }else if (["+", "-", "*", "/","^"].includes(token)&&i!==0) {
       // 如果 token 是操作符，则处理符号栈中的操作符
       while (
         operatorStack.length > 0 &&
