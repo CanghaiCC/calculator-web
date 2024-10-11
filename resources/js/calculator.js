@@ -19,7 +19,7 @@ function calculate(expression) {
     "-": 1,
     "*": 2, // 乘法和除法的优先级为2
     "/": 2,
-    "^": 3,
+    "^": 3,//  幂运算的优先级为3
   };
 
   // applyOperator 函数用于执行具体的运算操作
@@ -54,14 +54,13 @@ function calculate(expression) {
   }
 
   // 使用正则表达式将输入的表达式分割成操作数和操作符
-  const tokens = expression.match(/(\d+(\.\d+)?|[\+\-\*\/\^])/g);
-
+  const tokens = expression.match(/((?<!\d)-?\d+(\.\d+)?|[\+\-\*\/\^])/g);
   // 遍历分割后的每个 token
   for (const token of tokens) {
     // 如果 token 是数字（包括小数），则将其转换为浮点数并压入数栈
     if (!isNaN(token)) {
       numberStack.push(parseFloat(token));
-    } else if (["+", "-", "*", "/","^"].includes(token)) {
+    }else if (["+", "-", "*", "/","^"].includes(token)) {
       // 如果 token 是操作符，则处理符号栈中的操作符
       while (
         operatorStack.length > 0 &&
